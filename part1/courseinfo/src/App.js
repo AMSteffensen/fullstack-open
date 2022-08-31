@@ -3,25 +3,28 @@ const Header = (props) => {
   return (
     <>
       <h1>{props.course}</h1>
+      <br />
     </>
   )
 }
+
+const Part = (props) => {
+  
+  return (
+    <>
+      <p>{props.part} {props.exercise}</p>
+    </>
+  )
+}
+
 
 const Content = (props) => {
   
   return (
     <>
-      <section>
-        <p>{props.part1} {props.exercises1}</p>
-      </section>
-      <section>
-        <p>{props.part2} {props.exercises2}</p>
-      </section>
-      <section>
-      <p>
-        {props.part3} {props.exercises3}
-      </p>
-      </section>
+      <Part part={props.part1} exercise={props.exercises1} />
+      <Part part={props.part2} exercise={props.exercises2} />
+      <Part part={props.part3} exercise={props.exercises3} />
     </>
   )
 }
@@ -40,11 +43,11 @@ const Total = (props) => {
 
 const App = () => {
   const course = 'Half Stack application development'
-  const part1 = 'Fundamentals of React'
+  const part1 = 'Fundamentals of React: '
   const exercises1 = 10
-  const part2 = 'Using props to pass data'
+  const part2 = 'Using props to pass data: '
   const exercises2 = 7
-  const part3 = 'State of a component'
+  const part3 = 'State of a component: '
   const exercises3 = 14
 
   return (
