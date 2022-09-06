@@ -2,13 +2,27 @@ import { useState } from 'react'
 
 
 const Statistics = (props) => {
+  if (props.number === 0 && props.name === true ) {
+    return (
+      <></>
+    )
+  }
+  if (props.number === 0 ) {
+    return (
+      <></>
+    )
+  }
+  if (isNaN(props.number )  ) {
+    return (
+      <></>
+    )
+  }
   return (
     <>
           <p>{props.name} {props.number}</p>
     </>
   )
 }
-
 
 const App = () => {
   // save clicks of each button to its own state
