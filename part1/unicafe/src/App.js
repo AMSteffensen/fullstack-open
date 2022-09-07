@@ -25,7 +25,14 @@ const StatisticLine = (props) => {
     )
   }
   return (
-    <><p>{props.text} - {props.number}</p></>
+    <>
+    <table>
+    <tr>
+      <th>{props.text}</th>
+      <td> {props.number} </td>
+      </tr>
+    </table>
+      </>
   )
 }
 
