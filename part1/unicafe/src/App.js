@@ -1,7 +1,14 @@
 import { useState } from 'react'
 
+const Button = ({ handleClick, text }) => {
+  return(
+    <button onClick={handleClick}>
+    {text}
+  </button>
+  )
+}
 
-const Statistics = (props) => {
+const StatisticLine = (props) => {
   if (props.number === 0 && props.name === true ) {
     return (
       <></>
@@ -18,8 +25,21 @@ const Statistics = (props) => {
     )
   }
   return (
+    <><p>{props.text} - {props.number}</p></>
+  )
+}
+
+
+ 
+const Statistics = (props) => {
+  return ( 
     <>
-          <p>{props.name} {props.number}</p>
+          <StatisticLine text={"good"} number={props.good} />
+          <StatisticLine text={"bad"} number={props.neutral} />
+          <StatisticLine text={"neutral"} number={props.bad} />
+          <StatisticLine text={"All"} number={props.all} />
+          <StatisticLine text={"Average"} number={props.average} />
+          <StatisticLine text={"Positive"} number={props.positive} />
     </>
   )
 }
@@ -45,17 +65,15 @@ const App = () => {
   return (
     <div>
       <h1>Give feedback</h1>
-
-      <button onClick={()=>increaseGoodByOne()}>Good</button>
-      <button onClick={()=>increaseNeutralByOne()}>Neutral</button>
-      <button onClick={()=>increaseBadByOne()}>Bad</button>
+      <Button handleClick={increaseGoodByOne} text="Good" />
+      <Button handleClick={increaseNeutralByOne} text="Neutral" />
+      <Button handleClick={increaseBadByOne} text="Bad" />
+      
       <h2>Stats</h2>
-      <Statistics name={"Good: "} number={good} />
-      <Statistics name={"Neutral: "} number={neutral} />
-      <Statistics name={"bad: "} number={bad} />
-      <Statistics name={"All: "} number={good + neutral + bad} />
-      <Statistics name={"Average: "} number={(good - bad) /(good + bad + neutral)} />
-      <Statistics name={"Positive: "} number={(good)/(bad+good+neutral)*100} />
+      <Statistics  good={good} 
+      neutral={neutral} bad={bad} 
+      average={(good - bad) /(good + bad + neutral)} 
+      positive={(good)/(bad+good+neutral)*100} />
     </div>
   )
 }
