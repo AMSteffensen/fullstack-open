@@ -12,19 +12,28 @@ function App() {
   ]
 
   const [selected, setSelected] = useState(0)
+  const [points, setPoints] = useState([])
 
+
+git
   const handleClick = (props) => {
     let n = Math.floor(Math.random() * 6) + 1;
-    console.log(n)
-    //console.log(props.n)
-    console.log(anecdotes[n])
     setSelected(n)
+  }
+
+
+  const handleVote = (props) => {
+    const copy = { ...points };
+    copy[selected] += 1
+    setPoints(copy);
+    console.log(copy)
   }
 
   return (
     <>
       <div>{anecdotes[selected]}</div>
     <div>  
+      <button onClick={handleVote}>vote</button>
       <button onClick={handleClick}>next anecdote</button>
     </div>
     </>
