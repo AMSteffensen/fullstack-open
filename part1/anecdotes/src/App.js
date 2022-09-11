@@ -28,25 +28,59 @@ function App() {
 
   return (
     <>
-      <div>{anecdotes[selected]}</div>
+    <h1>Daily anecdotes</h1>
+      <div>"{anecdotes[selected]}"</div>
       <ShowVotes points={points} selected={selected} />
     <div>  
+      <br />
       <button onClick={handleVote}>vote</button>
       <button onClick={handleClick}>next anecdote</button>
     </div>
+    <MostVotes votes={points} anecdotes={anecdotes} />
     </>
   );
 }
 
 const ShowVotes = ({points, selected}) => {
   let numVotes = points[selected]
-  console.log(numVotes)
   if (numVotes == null) {
     numVotes = 0
   }
   return (
-    <div>Vote {selected} has {numVotes.votes} votes.</div>
+    <div> has {numVotes.votes} votes.</div>
   )
 }
+
+const MostVotes = ({votes, anecdotes}) => {
+  let mostVotes = (Math.max(...votes.map(o => o.votes)))
+  const indexes = [];
+
+  console.log(indexes)
+
+  for (let index = 0; index < votes.length; index++) {
+    if (votes[index].votes === mostVotes) {
+      indexes.push(index);
+    }
+  }
+
+  if (mostVotes === 0) {
+    return(<></>)
+  }
+  
+  if(indexes.length > 1) {
+    return(
+      <><p>We have a tie between annectdotes {indexes.join(' , ')} </p></>
+    )
+  }
+
+  return (
+    <>
+    <p>"{anecdotes[indexes]}"</p>
+    <p> has {mostVotes} votes. </p>
+    </>
+  )
+  
+}
+
 
 export default App;
