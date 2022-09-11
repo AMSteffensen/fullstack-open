@@ -12,32 +12,41 @@ function App() {
   ]
 
   const [selected, setSelected] = useState(0)
-  const [points, setPoints] = useState([])
+  const [points, setPoints] =  useState(anecdotes.map(text => ({ text, votes: 0 })))
 
 
-git
-  const handleClick = (props) => {
+  const handleClick = () => {
     let n = Math.floor(Math.random() * 6) + 1;
     setSelected(n)
   }
 
-
-  const handleVote = (props) => {
-    const copy = { ...points };
-    copy[selected] += 1
-    setPoints(copy);
-    console.log(copy)
+  const handleVote = () => {
+    const votes = [...points]
+    votes[selected].votes += 1
+    setPoints(votes);
   }
 
   return (
     <>
       <div>{anecdotes[selected]}</div>
+      <ShowVotes points={points} selected={selected} />
     <div>  
       <button onClick={handleVote}>vote</button>
       <button onClick={handleClick}>next anecdote</button>
     </div>
     </>
   );
+}
+
+const ShowVotes = ({points, selected}) => {
+  let numVotes = points[selected]
+  console.log(numVotes)
+  if (numVotes == null) {
+    numVotes = 0
+  }
+  return (
+    <div>Vote {selected} has {numVotes.votes} votes.</div>
+  )
 }
 
 export default App;
