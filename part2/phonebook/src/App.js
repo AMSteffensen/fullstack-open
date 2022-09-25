@@ -14,8 +14,21 @@ const App = () => {
       name: newName,
       id: persons.length + 1,
     }
+  
+    const isFound = persons.some(person => {
+    if (JSON.stringify(nameObject.name).toLowerCase() === JSON.stringify(person.name).toLowerCase()) {
+      return true;
+    }
+ 
+    return false;
+  });
+
+  if (isFound) {
+    alert(`${newName} is already added to phonebook`);
+  } else {
     setPersons(persons.concat(nameObject))
     setNewName('')
+  }  
   }
 
   const handleNameChange = (event) => {
