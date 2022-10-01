@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import List from "./components/List";
+import Search from "./components/Search";
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -12,11 +13,6 @@ const App = () => {
   const [inputText, setInputText] = useState("");
   const [newName, setNewName] = useState('')
   const [newPhone, setNewPhone] = useState('')
- 
-  let searchHandler = (e) => {
-    let lowerCase = e.target.value.toLowerCase();
-    setInputText(lowerCase);
-  };
 
   const addName = (event) => {
     event.preventDefault()
@@ -45,6 +41,12 @@ const App = () => {
   }
 
 
+  let searchHandler = (e) => {
+    let lowerCase = e.target.value.toLowerCase();
+    //console.log(lowerCase)
+    setInputText(lowerCase);
+  };
+
   const handleNameChange = (event) => {
     setNewName(event.target.value)
   }
@@ -57,9 +59,8 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <form>
-        <div>Search: <input onChange={searchHandler}/></div>
-      </form>
+      <Search input={inputText} onChange={searchHandler} />
+      
 
       <h2>Add a new</h2>
       <form onSubmit={addName}> 
