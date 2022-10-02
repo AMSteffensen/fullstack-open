@@ -41,7 +41,7 @@ const App = () => {
   } else {
     setPersons(persons.concat(nameObject))
     setNewName('')
-    console.log(persons)
+    setNewPhone('')
   }  
   }
 
