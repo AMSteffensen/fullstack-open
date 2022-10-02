@@ -1,6 +1,11 @@
 import { useState } from 'react'
 import List from "./components/List";
 import Search from "./components/Search";
+import PersonForm from "./components/PersonForm";
+
+// TODO: add person form to component
+// TODO: add filter to component
+
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -43,7 +48,6 @@ const App = () => {
 
   let searchHandler = (e) => {
     let lowerCase = e.target.value.toLowerCase();
-    //console.log(lowerCase)
     setInputText(lowerCase);
   };
 
@@ -61,20 +65,8 @@ const App = () => {
       <h2>Phonebook</h2>
       <Search input={inputText} onChange={searchHandler} />
       
-
       <h2>Add a new</h2>
-      <form onSubmit={addName}> 
-
-        <div>name: <input
-          value={newName}
-          onChange={handleNameChange}
-        /></div>
-        <div>number: <input onChange={handlePhoneChange}/></div>
-        <div>
-        <button  type="submit">Add</button>
-        </div>
-      </form>
-
+      <PersonForm value={newName} onSubmit={addName} onChangeName={handleNameChange} onChangeNumber={handlePhoneChange} />
       <h2>Numbers</h2>
       
       <List input={inputText} person={persons} />

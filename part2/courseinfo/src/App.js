@@ -1,7 +1,6 @@
 import Course from './compontents/Course'
 
 const App = () => {
-  console.log('app')
     const course = {
       id: 1,
       name: 'Half Stack application development',
