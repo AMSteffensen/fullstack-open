@@ -1,23 +1,27 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 import List from "./components/List";
 import Search from "./components/Search";
 import PersonForm from "./components/PersonForm";
 
-// TODO: add person form to component
-// TODO: add filter to component
-
-
 const App = () => {
-  const [persons, setPersons] = useState([
-    { name: 'Arto Hellas', phone: '040-123456', id: 1 },
-    { name: 'Ada Lovelace', phone: '39-44-5323523', id: 2 },
-    { name: 'Dan Abramov', phone: '12-43-234345', id: 3 },
-    { name: 'Mary Poppendieck', phone: '39-23-6423122', id: 4 }
-  ])
-
+  const [notes, setNotes] = useState([])
   const [inputText, setInputText] = useState("");
   const [newName, setNewName] = useState('')
   const [newPhone, setNewPhone] = useState('')
+
+  useEffect(() => {
+    console.log('effect')
+    axios
+      .get('http://localhost:3001/notes')
+      .then(response => {
+        console.log('promise fulfilled')
+        setNotes(response.data)
+      })
+  }, [])
+  
+
+  console.log('render', notes.length, 'notes')
 
   const addName = (event) => {
     event.preventDefault()
@@ -25,10 +29,10 @@ const App = () => {
     const nameObject = {
       name: newName,
       phone: newPhone,
-      id: persons.length + 1,
+      id: notes.length + 1,
     }
   
-    const isFound = persons.some(person => {
+    const isFound = notes.some(person => {
     if (JSON.stringify(nameObject.name).toLowerCase() === JSON.stringify(person.name).toLowerCase()) {
       return true;
     }
@@ -39,7 +43,7 @@ const App = () => {
   if (isFound) {
     alert(`${newName} is already added to phonebook`);
   } else {
-    setPersons(persons.concat(nameObject))
+    setNotes(notes.concat(nameObject))
     setNewName('')
     setNewPhone('')
   }  
@@ -69,7 +73,7 @@ const App = () => {
       <PersonForm value={newName} onSubmit={addName} onChangeName={handleNameChange} onChangeNumber={handlePhoneChange} />
       <h2>Numbers</h2>
       
-      <List input={inputText} person={persons} />
+      <List input={inputText} person={notes} />
 
     </div>
   )
