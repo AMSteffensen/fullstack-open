@@ -2,10 +2,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import List from "./components/List";
 import Search from "./components/Search";
-import PersonForm from "./components/PersonForm";
 
 const App = () => {
-  const [countires, setcountires] = useState([]);
   const [allCountries, setAllCountries] = useState([]);
   const [inputText, setInputText] = useState("");
 

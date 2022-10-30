@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react";
 
 const Search = ({ input, onChange }) => {
-  return (
-        <div>Search: <input vlaue={input} type="text" onChange={onChange}/></div>
-  )
-}
+  // If there are ten or fewer countries, but more than one, then all countries matching the query are shown:
 
-export default Search
+  return (
+    <div>
+      Search: <input vlaue={input} type="text" onChange={onChange} />
+    </div>
+  );
+};
+
+export default Search;
